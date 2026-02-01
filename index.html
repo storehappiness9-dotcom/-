@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر السعادة - حلول طبية متكاملة</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background Elements -->
+    <div class="bg-gradient-orb orb-1"></div>
+    <div class="bg-gradient-orb orb-2"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">متجر <span>السعادة</span></div>
+            <ul class="nav-links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#offers">العروض</a></li>
+                <li><a href="#contact" class="btn-primary small">اطلب الآن</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <span class="badge">عناية طبية فائقة</span>
+                <h1>صحتك هي <br> <span class="gradient-text">استثمارك الأغلى</span></h1>
+                <p>نقدم لك أفضل المنتجات الطبية والمكملات الغذائية الطبيعية لضمان حياة صحية وسعيدة لك ولعائلتك. جودة
+                    مضمونة ونتائج فعالة.</p>
+                <div class="hero-btns">
+                    <a href="#offers" class="btn-primary">شاهد العروض <i class="fas fa-arrow-left"></i></a>
+                    <a href="#contact" class="btn-secondary">تواصل معنا</a>
+                </div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <h3>100%</h3>
+                        <p>منتجات طبيعية</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>24/7</h3>
+                        <p>دعم متواصل</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>+10K</h3>
+                        <p>عميل سعيد</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="image-wrapper">
+                    <!-- Placeholder for Hero Image -->
+                    <img src="image/image-1.jpeg" alt="Medical Product" class="floating-watch">
+                    <div class="circle-bg"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Offers/Products Section -->
+    <section id="offers" class="features">
+        <div class="container">
+            <div class="section-title text-center">
+                <h2>عروض <span>متجر السعادة</span></h2>
+                <p>باقات توفيرية تناسب احتياجاتك</p>
+            </div>
+
+            <div class="features-grid">
+                <!-- Card 1: Product Type A -->
+                <div class="feature-card glass-effect product-card">
+                    <div class="product-image">
+                        <img src="image/image-1.jpeg" alt="Product Type A"
+                            style="width:100%; border-radius:15px; margin-bottom:15px;">
+                    </div>
+                    <h3>المجموعة الأساسية</h3>
+                    <p class="description">حلول متكاملة لصحتك اليومية.</p>
+
+                    <div class="pricing-tiers">
+                        <div class="tier">
+                            <span>عبوة واحدة</span>
+                            <span class="price">155 ريال</span>
+                        </div>
+                        <div class="tier best-value">
+                            <span>عبوتان (توفير)</span>
+                            <span class="price">189 ريال</span>
+                        </div>
+                        <div class="tier">
+                            <span>3 عبوات (الأكثر طلباً)</span>
+                            <span class="price">230 ريال</span>
+                        </div>
+                    </div>
+
+                    <a href="#contact" class="btn-primary full-width" onclick="selectProduct('typeA')">اطلب هذا
+                        العرض</a>
+                </div>
+
+                <!-- Card 1.5: Product Type A2 (Image 2) -->
+                <div class="feature-card glass-effect product-card">
+                    <div class="product-image">
+                        <img src="image/image-2.jpeg" alt="Product Type A2"
+                            style="width:100%; border-radius:15px; margin-bottom:15px;">
+                    </div>
+                    <h3>المجموعة الأساسية 2</h3>
+                    <p class="description">تصميم مميز يناسب ذوقك.</p>
+
+                    <div class="pricing-tiers">
+                        <div class="tier">
+                            <span>عبوة واحدة</span>
+                            <span class="price">155 ريال</span>
+                        </div>
+                        <div class="tier best-value">
+                            <span>عبوتان (توفير)</span>
+                            <span class="price">189 ريال</span>
+                        </div>
+                        <div class="tier">
+                            <span>3 عبوات (الأكثر طلباً)</span>
+                            <span class="price">230 ريال</span>
+                        </div>
+                    </div>
+
+                    <a href="#contact" class="btn-primary full-width" onclick="selectProduct('typeA2')">اطلب هذا
+                        العرض</a>
+                </div>
+
+                <!-- Card: Product Image 5 -->
+                <div class="feature-card glass-effect product-card">
+                    <div class="product-image">
+                        <img src="image/image-5.jpeg" alt="Product Image 5"
+                            style="width:100%; border-radius:15px; margin-bottom:15px;">
+                    </div>
+                    <h3>المجموعة الخاصة</h3>
+                    <p class="description">جودة عالية وسعر منافس.</p>
+
+                    <div class="pricing-tiers">
+                        <div class="tier">
+                            <span>عبوة واحدة</span>
+                            <span class="price">125 ريال</span>
+                        </div>
+                        <div class="tier best-value">
+                            <span>عبوتان (توفير)</span>
+                            <span class="price">170 ريال</span>
+                        </div>
+                        <div class="tier">
+                            <span>3 عبوات (الأكثر طلباً)</span>
+                            <span class="price">210 ريال</span>
+                        </div>
+                    </div>
+
+                    <a href="#contact" class="btn-primary full-width" onclick="selectProduct('typeImg5')">اطلب هذا
+                        العرض</a>
+                </div>
+
+                <!-- Card: Product Image 6 -->
+                <div class="feature-card glass-effect product-card">
+                    <div class="product-image">
+                        <img src="image/image-6.jpeg" alt="Product Image 6"
+                            style="width:100%; border-radius:15px; margin-bottom:15px;">
+                    </div>
+                    <h3>المجموعة الماسية</h3>
+                    <p class="description">الأفضل مبيعاً هذا الموسم.</p>
+
+                    <div class="pricing-tiers">
+                        <div class="tier">
+                            <span>عبوة واحدة</span>
+                            <span class="price">145 ريال</span>
+                        </div>
+                        <div class="tier best-value">
+                            <span>عبوتان (توفير)</span>
+                            <span class="price">190 ريال</span>
+                        </div>
+                        <div class="tier">
+                            <span>3 عبوات (الأكثر طلباً)</span>
+                            <span class="price">235 ريال</span>
+                        </div>
+                    </div>
+
+                    <a href="#contact" class="btn-primary full-width" onclick="selectProduct('typeImg6')">اطلب هذا
+                        العرض</a>
+                </div>
+
+                <!-- Card 2: Product Type B -->
+                <div class="feature-card glass-effect product-card">
+                    <div class="product-image">
+                        <img src="image/image-3.jpeg" alt="Product Type B"
+                            style="width:100%; border-radius:15px; margin-bottom:15px;">
+                    </div>
+                    <h3>المجموعة المتقدمة</h3>
+                    <p class="description">فعالية مضاعفة لنتائج أسرع.</p>
+
+                    <div class="pricing-tiers">
+                        <div class="tier">
+                            <span>عبوة واحدة</span>
+                            <span class="price">120 ريال</span>
+                        </div>
+                        <div class="tier best-value">
+                            <span>عبوتان (توفير)</span>
+                            <span class="price">175 ريال</span>
+                        </div>
+                        <div class="tier">
+                            <span>3 عبوات (VIP)</span>
+                            <span class="price">200 ريال</span>
+                        </div>
+                    </div>
+
+                    <a href="#contact" class="btn-primary full-width" onclick="selectProduct('typeB')">اطلب هذا
+                        العرض</a>
+                </div>
+
+                <!-- Card 3: Product Type C (Image 4) -->
+                <div class="feature-card glass-effect product-card">
+                    <div class="product-image">
+                        <img src="image/image-4.jpeg" alt="Product Type C"
+                            style="width:100%; border-radius:15px; margin-bottom:15px;">
+                    </div>
+                    <h3>المجموعة المميزة</h3>
+                    <p class="description">منتجات حصرية للعناية الخاصة.</p>
+
+                    <div class="pricing-tiers">
+                        <div class="tier">
+                            <span>عبوة واحدة</span>
+                            <span class="price">120 ريال</span>
+                        </div>
+                        <div class="tier">
+                            <span>عبوتان</span>
+                            <span class="price">175 ريال</span>
+                        </div>
+                        <div class="tier">
+                            <span>3 عبوات</span>
+                            <span class="price">200 ريال</span>
+                        </div>
+                    </div>
+
+                    <a href="#contact" class="btn-primary full-width" onclick="selectProduct('typeC')">اطلب هذا
+                        العرض</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lead Form Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-wrapper glass-effect">
+                <div class="contact-info">
+                    <h2>ابدأ رحلة <br><span>السعادة الآن</span></h2>
+                    <p>سجل طلبك وسيقوم فريقنا بالتواصل معك لتأكيد الطلب وشحنه إليك في أسرع وقت.</p>
+
+                    <div class="features-list-icon">
+                        <p><i class="fas fa-check-circle"></i> دفع عند الاستلام</p>
+                        <p><i class="fas fa-check-circle"></i> شحن سريع لجميع المناطق</p>
+                        <p><i class="fas fa-check-circle"></i> ضمان الجودة 100%</p>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="leadForm">
+                        <div class="form-group">
+                            <label for="product">اختر العرض المناسب</label>
+                            <select id="product" required
+                                style="width: 100%; padding: 15px; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); border-radius: 10px; color: white; font-size: 1rem; outline: none;">
+                                <option value="" disabled selected>-- اختر العرض --</option>
+                                <optgroup label="المجموعة الأساسية (Image 1)">
+                                    <option value="Basic - 1 Pack - 155 SAR">عبوة واحدة - 155 ريال</option>
+                                    <option value="Basic - 2 Packs - 189 SAR">عبوتان - 189 ريال</option>
+                                    <option value="Basic - 3 Packs - 230 SAR">3 عبوات - 230 ريال</option>
+                                </optgroup>
+                                <optgroup label="المجموعة الأساسية 2 (Image 2)">
+                                    <option value="Basic2 - 1 Pack - 155 SAR">عبوة واحدة - 155 ريال</option>
+                                    <option value="Basic2 - 2 Packs - 189 SAR">عبوتان - 189 ريال</option>
+                                    <option value="Basic2 - 3 Packs - 230 SAR">3 عبوات - 230 ريال</option>
+                                </optgroup>
+                                <optgroup label="المجموعة الخاصة (Image 5)">
+                                    <option value="Special - 1 Pack - 125 SAR">عبوة واحدة - 125 ريال</option>
+                                    <option value="Special - 2 Packs - 170 SAR">عبوتان - 170 ريال</option>
+                                    <option value="Special - 3 Packs - 210 SAR">3 عبوات - 210 ريال</option>
+                                </optgroup>
+                                <optgroup label="المجموعة الماسية (Image 6)">
+                                    <option value="Diamond - 1 Pack - 145 SAR">عبوة واحدة - 145 ريال</option>
+                                    <option value="Diamond - 2 Packs - 190 SAR">عبوتان - 190 ريال</option>
+                                    <option value="Diamond - 3 Packs - 235 SAR">3 عبوات - 235 ريال</option>
+                                </optgroup>
+                                <optgroup label="المجموعة المتقدمة (Image 3)">
+                                    <option value="Advanced - 1 Pack - 120 SAR">عبوة واحدة - 120 ريال</option>
+                                    <option value="Advanced - 2 Packs - 175 SAR">عبوتان - 175 ريال</option>
+                                    <option value="Advanced - 3 Packs - 200 SAR">3 عبوات - 200 ريال</option>
+                                </optgroup>
+                                <optgroup label="المجموعة المميزة (Image 4)">
+                                    <option value="Premium - 1 Pack - 120 SAR">عبوة واحدة - 120 ريال</option>
+                                    <option value="Premium - 2 Packs - 175 SAR">عبوتان - 175 ريال</option>
+                                    <option value="Premium - 3 Packs - 200 SAR">3 عبوات - 200 ريال</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">الاسم الكامل</label>
+                            <input type="text" id="name" placeholder="أدخل اسمك هنا" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">العنوان بالتفصيل</label>
+                            <input type="text" id="address" placeholder="المدينة، الحي، اسم الشارع" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">رقم الجوال</label>
+                            <input type="tel" id="phone" placeholder="05xxxxxxxx" required>
+                        </div>
+
+                        <button type="submit" class="btn-primary full-width">أكد الطلب الآن</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-logo">متجر <span>السعادة</span></div>
+            <p>جميع الحقوق محفوظة &copy; 2024</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
