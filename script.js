@@ -1,11 +1,71 @@
 // Header Scroll Effect
 const navbar = document.querySelector('.navbar');
 
+// WhatsApp Floating Button
+const whatsappBtn = document.getElementById('whatsappBtn');
+
+// Mobile Navigation
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+const mobileNavClose = document.getElementById('mobileNavClose');
+
+// Create backdrop element
+const backdrop = document.createElement('div');
+backdrop.className = 'mobile-nav-backdrop';
+document.body.appendChild(backdrop);
+
+// Open mobile menu
+function openMobileNav() {
+    mobileNavOverlay.classList.add('active');
+    backdrop.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+// Close mobile menu
+function closeMobileNav() {
+    mobileNavOverlay.classList.remove('active');
+    backdrop.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Event listeners for mobile nav
+if (hamburgerBtn) {
+    hamburgerBtn.addEventListener('click', openMobileNav);
+}
+
+if (mobileNavClose) {
+    mobileNavClose.addEventListener('click', closeMobileNav);
+}
+
+backdrop.addEventListener('click', closeMobileNav);
+
+// Close on link click
+document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+    link.addEventListener('click', closeMobileNav);
+});
+
+// Close on ESC key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileNavOverlay.classList.contains('active')) {
+        closeMobileNav();
+    }
+});
+
 window.addEventListener('scroll', () => {
+    // Navbar scroll effect
     if (window.scrollY > 50) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
+    }
+
+    // WhatsApp button visibility on scroll
+    if (whatsappBtn) {
+        if (window.scrollY > 300) {
+            whatsappBtn.classList.add('visible');
+        } else {
+            whatsappBtn.classList.remove('visible');
+        }
     }
 });
 
@@ -210,3 +270,39 @@ function selectProduct(type) {
         select.style.borderColor = '';
     }, 2000);
 }
+
+// Certificate Modal Functions
+function openCertificateModal(imgSrc, title, description) {
+    const modal = document.getElementById('certificateModal');
+    const modalImg = document.getElementById('modalCertificateImg');
+    const modalTitle = document.getElementById('modalCertificateTitle');
+    const modalDesc = document.getElementById('modalCertificateDesc');
+
+    modalImg.src = imgSrc;
+    modalTitle.textContent = title;
+    modalDesc.textContent = description;
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden'; // Prevent background scroll
+}
+
+function closeCertificateModal() {
+    const modal = document.getElementById('certificateModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = ''; // Restore scroll
+}
+
+// Close modal on click outside content
+document.addEventListener('click', (e) => {
+    const modal = document.getElementById('certificateModal');
+    if (modal && e.target === modal) {
+        closeCertificateModal();
+    }
+});
+
+// Close modal on ESC key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeCertificateModal();
+    }
+});

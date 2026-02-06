@@ -182,6 +182,136 @@ body {
     font-size: 14px;
 }
 
+/* Hamburger Menu Button */
+.hamburger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.hamburger-menu span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: var(--text-color);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* Mobile Navigation Overlay */
+.mobile-nav-overlay {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    z-index: 10001;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.15);
+}
+
+.mobile-nav-overlay.active {
+    right: 0;
+}
+
+.mobile-nav-content {
+    padding: 80px 30px 30px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.mobile-nav-close {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    background: #f1f5f9;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    color: #64748b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.mobile-nav-close:hover {
+    background: #fee2e2;
+    color: #ef4444;
+}
+
+.mobile-nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mobile-nav-links li {
+    margin-bottom: 10px;
+}
+
+.mobile-nav-links li a {
+    display: block;
+    padding: 15px 20px;
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.mobile-nav-links li a:hover {
+    background: rgba(2, 132, 199, 0.1);
+    color: var(--primary-color);
+}
+
+.mobile-nav-links li a.btn-primary {
+    background: var(--gradient-main);
+    color: white;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Mobile Nav Backdrop */
+.mobile-nav-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.mobile-nav-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Show hamburger on mobile */
+@media (max-width: 900px) {
+    .hamburger-menu {
+        display: flex;
+    }
+}
+
 /* Hero Section */
 .hero {
     min-height: 100vh;
@@ -280,6 +410,213 @@ body {
 
     50% {
         transform: translateY(-20px);
+    }
+}
+
+/* Certificates Section */
+.certificates {
+    padding: 60px 0;
+    background: linear-gradient(180deg, rgba(248, 250, 252, 0) 0%, #f8fafc 100%);
+}
+
+.certificates-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.certificate-card {
+    padding: 15px;
+    text-align: center;
+    background: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 4px solid var(--secondary-color);
+}
+
+.certificate-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.certificate-card h3 {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.certificate-desc {
+    font-size: 0.8rem;
+    color: #64748b;
+    line-height: 1.5;
+}
+
+.certificate-card {
+    cursor: pointer;
+}
+
+.certificate-image {
+    margin-bottom: 12px;
+    overflow: hidden;
+    border-radius: 10px;
+    position: relative;
+}
+
+.certificate-image img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.certificate-card:hover .certificate-image img {
+    transform: scale(1.05);
+}
+
+.certificate-desc {
+    font-size: 0.9rem;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.certificate-card {
+    cursor: pointer;
+}
+
+.certificate-image {
+    margin-bottom: 20px;
+    overflow: hidden;
+    border-radius: 15px;
+    position: relative;
+}
+
+.certificate-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(2, 132, 199, 0.85);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 15px;
+    color: white;
+    gap: 10px;
+}
+
+.certificate-overlay i {
+    font-size: 1.5rem;
+}
+
+.certificate-overlay span {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.certificate-card:hover .certificate-overlay {
+    opacity: 1;
+}
+
+/* Certificate Modal */
+.certificate-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    animation: fadeIn 0.3s ease;
+}
+
+.certificate-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.certificate-modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 90%;
+    max-height: 90vh;
+    overflow: auto;
+    text-align: center;
+    position: relative;
+    animation: zoomIn 0.3s ease;
+}
+
+.certificate-modal-content img {
+    max-width: 100%;
+    max-height: 60vh;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.certificate-modal-content h3 {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.certificate-modal-content p {
+    font-size: 1rem;
+    color: #64748b;
+    line-height: 1.7;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.certificate-modal-close {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    font-size: 2rem;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: color 0.2s;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f1f5f9;
+}
+
+.certificate-modal-close:hover {
+    color: #ef4444;
+    background: #fee2e2;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
     }
 }
 
@@ -534,6 +871,82 @@ footer {
         display: inline-block;
         text-align: right;
     }
+
+    /* Footer Responsive */
+    .footer-container {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    footer {
+        padding: 30px 0;
+    }
+
+    .footer-logo {
+        font-size: 20px;
+    }
+
+    footer p {
+        font-size: 0.9rem;
+        color: #64748b;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+
+    .certificates {
+        padding: 40px 0;
+    }
+
+    .certificates-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        max-width: 100%;
+        padding: 0 15px;
+    }
+
+    .certificate-card {
+        padding: 10px;
+    }
+
+    .certificate-image img {
+        height: 120px;
+    }
+
+    .certificate-card h3 {
+        font-size: 0.85rem;
+    }
+
+    .certificate-desc {
+        font-size: 0.7rem;
+        display: none;
+    }
+
+    .certificate-overlay i {
+        font-size: 1.2rem;
+    }
+
+    .certificate-overlay span {
+        font-size: 0.75rem;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .certificates-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .certificate-image img {
+        height: 100px;
+    }
+
+    .certificate-card h3 {
+        font-size: 0.75rem;
+    }
 }
 
 /* Custom Alert Styles */
@@ -623,5 +1036,99 @@ footer {
     to {
         transform: translateY(-20px);
         opacity: 0;
+    }
+}
+
+/* WhatsApp Floating Button */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    opacity: 0;
+    transform: translateX(100px);
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    overflow: hidden;
+}
+
+.whatsapp-float img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.whatsapp-float.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.whatsapp-float:hover {
+    transform: translateX(0) scale(1.15);
+    box-shadow: 0 12px 35px rgba(37, 211, 102, 0.5);
+}
+
+.whatsapp-float::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: rotate(45deg);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+    }
+
+    100% {
+        transform: translateX(100%) rotate(45deg);
+    }
+}
+
+/* Pulse animation for attention */
+.whatsapp-float.visible::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(37, 211, 102, 0.4);
+    z-index: -1;
+    animation: pulse-ring 2s infinite;
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        width: 55px;
+        height: 55px;
+        bottom: 20px;
+        right: 20px;
     }
 }

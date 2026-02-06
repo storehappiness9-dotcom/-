@@ -27,8 +27,26 @@
                 <li><a href="#offers">العروض</a></li>
                 <li><a href="#contact" class="btn-primary small">اطلب الآن</a></li>
             </ul>
+            <!-- Hamburger Menu Button -->
+            <button class="hamburger-menu" id="hamburgerBtn" aria-label="فتح القائمة">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay">
+        <div class="mobile-nav-content">
+            <button class="mobile-nav-close" id="mobileNavClose" aria-label="إغلاق القائمة">&times;</button>
+            <ul class="mobile-nav-links">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#offers">العروض</a></li>
+                <li><a href="#contact" class="btn-primary">اطلب الآن</a></li>
+            </ul>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <header id="home" class="hero">
@@ -40,7 +58,7 @@
                     مضمونة ونتائج فعالة.</p>
                 <div class="hero-btns">
                     <a href="#offers" class="btn-primary">شاهد العروض <i class="fas fa-arrow-left"></i></a>
-                    <a href="#contact" class="btn-secondary">تواصل معنا</a>
+                    <a href="#contact" class="btn-secondary">اختار المنتج</a>
                 </div>
                 <div class="stats">
                     <div class="stat-item">
@@ -48,8 +66,8 @@
                         <p>منتجات طبيعية</p>
                     </div>
                     <div class="stat-item">
-                        <h3>24/7</h3>
-                        <p>دعم متواصل</p>
+                        <h3>24</h3>
+                        <p>ساعة دعم متواصل</p>
                     </div>
                     <div class="stat-item">
                         <h3>+10K</h3>
@@ -67,6 +85,56 @@
         </div>
     </header>
 
+    <!-- Certificates Section -->
+    <section id="certificates" class="certificates">
+        <div class="container">
+            <div class="section-title text-center">
+                <h2>شهاداتنا <span>واعتماداتنا</span></h2>
+                <p>نفتخر بحصولنا على أعلى الشهادات والاعتمادات العالمية</p>
+            </div>
+
+            <div class="certificates-grid">
+                <div class="certificate-card glass-effect"
+                    onclick="openCertificateModal('image/image-7.jpeg', 'شهادة تخرج جراحة المسالك البولية', 'شهادة طبية معتمدة من أكبر الجامعات والمراكز الطبية المتخصصة في مجال جراحة المسالك البولية والتناسلية. تمنح هذه الشهادة الثقة الكاملة في جودة المنتجات وفعاليتها المثبتة علمياً، مدعومة بخبرة طبية تمتد لسنوات من البحث والتطوير.')">
+                    <div class="certificate-image">
+                        <img src="image/image-7.jpeg" alt="شهادة تخرج جراحة المسالك البولية">
+                        <div class="certificate-overlay">
+                            <i class="fas fa-search-plus"></i>
+                            <span>اضغط للعرض</span>
+                        </div>
+                    </div>
+                    <h3>شهادة تخرج جراحة المسالك البولية</h3>
+                    <p class="certificate-desc">شهادة طبية معتمدة من أكبر الجامعات المتخصصة في جراحة المسالك البولية
+                        والتناسلية</p>
+                </div>
+
+                <!-- Certificate 2 -->
+                <div class="certificate-card glass-effect"
+                    onclick="openCertificateModal('image/image-8.jpeg', 'معتمدين من ISO', 'حاصلين على شهادة الجودة العالمية ISO - المنظمة الدولية للمعايير. هذا الاعتماد يضمن أن جميع منتجاتنا تخضع لأعلى معايير الجودة والسلامة العالمية، من مرحلة التصنيع وحتى وصولها إليكم. نفخر بالتزامنا الكامل بالمواصفات الدولية.')">
+                    <div class="certificate-image">
+                        <img src="image/image-8.jpeg" alt="شهادة اعتماد ISO">
+                        <div class="certificate-overlay">
+                            <i class="fas fa-search-plus"></i>
+                            <span>اضغط للعرض</span>
+                        </div>
+                    </div>
+                    <h3>معتمدين من ISO</h3>
+                    <p class="certificate-desc">شهادة الجودة العالمية ISO تضمن أعلى معايير السلامة والجودة الدولية</p>
+                </div>
+            </div>
+
+            <!-- Certificate Modal -->
+            <div id="certificateModal" class="certificate-modal">
+                <div class="certificate-modal-content">
+                    <span class="certificate-modal-close" onclick="closeCertificateModal()">&times;</span>
+                    <img id="modalCertificateImg" src="" alt="Certificate">
+                    <h3 id="modalCertificateTitle"></h3>
+                    <p id="modalCertificateDesc"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Offers/Products Section -->
     <section id="offers" class="features">
         <div class="container">
@@ -82,7 +150,7 @@
                         <img src="image/image-1.jpeg" alt="Product Type A"
                             style="width:100%; border-radius:15px; margin-bottom:15px;">
                     </div>
-                    <h3>المجموعة الأساسية</h3>
+                    <h3>CAIQING</h3>
                     <p class="description">حلول متكاملة لصحتك اليومية.</p>
 
                     <div class="pricing-tiers">
@@ -110,7 +178,7 @@
                         <img src="image/image-2.jpeg" alt="Product Type A2"
                             style="width:100%; border-radius:15px; margin-bottom:15px;">
                     </div>
-                    <h3>المجموعة الأساسية 2</h3>
+                    <h3>XXXL AFRICAN SIZE</h3>
                     <p class="description">تصميم مميز يناسب ذوقك.</p>
 
                     <div class="pricing-tiers">
@@ -138,7 +206,7 @@
                         <img src="image/image-5.jpeg" alt="Product Image 5"
                             style="width:100%; border-radius:15px; margin-bottom:15px;">
                     </div>
-                    <h3>المجموعة الخاصة</h3>
+                    <h3>SUPER VIGA</h3>
                     <p class="description">جودة عالية وسعر منافس.</p>
 
                     <div class="pricing-tiers">
@@ -166,7 +234,7 @@
                         <img src="image/image-6.jpeg" alt="Product Image 6"
                             style="width:100%; border-radius:15px; margin-bottom:15px;">
                     </div>
-                    <h3>المجموعة الماسية</h3>
+                    <h3>POWER</h3>
                     <p class="description">الأفضل مبيعاً هذا الموسم.</p>
 
                     <div class="pricing-tiers">
@@ -194,7 +262,7 @@
                         <img src="image/image-3.jpeg" alt="Product Type B"
                             style="width:100%; border-radius:15px; margin-bottom:15px;">
                     </div>
-                    <h3>المجموعة المتقدمة</h3>
+                    <h3>TITAN GEL</h3>
                     <p class="description">فعالية مضاعفة لنتائج أسرع.</p>
 
                     <div class="pricing-tiers">
@@ -222,7 +290,7 @@
                         <img src="image/image-4.jpeg" alt="Product Type C"
                             style="width:100%; border-radius:15px; margin-bottom:15px;">
                     </div>
-                    <h3>المجموعة المميزة</h3>
+                    <h3>MAX MAN</h3>
                     <p class="description">منتجات حصرية للعناية الخاصة.</p>
 
                     <div class="pricing-tiers">
@@ -230,8 +298,8 @@
                             <span>عبوة واحدة</span>
                             <span class="price">120 ريال</span>
                         </div>
-                        <div class="tier">
-                            <span>عبوتان</span>
+                        <div class="tier best-value">
+                            <span>عبوتان (توفير)</span>
                             <span class="price">175 ريال</span>
                         </div>
                         <div class="tier">
@@ -264,36 +332,36 @@
                 <div class="contact-form">
                     <form id="leadForm">
                         <div class="form-group">
-                            <label for="product">اختر العرض المناسب</label>
+                            <label for="product">اختار المنتج</label>
                             <select id="product" required
                                 style="width: 100%; padding: 15px; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); border-radius: 10px; color: white; font-size: 1rem; outline: none;">
                                 <option value="" disabled selected>-- اختر العرض --</option>
-                                <optgroup label="المجموعة الأساسية (Image 1)">
+                                <optgroup label="CAIQING">
                                     <option value="Basic - 1 Pack - 155 SAR">عبوة واحدة - 155 ريال</option>
                                     <option value="Basic - 2 Packs - 189 SAR">عبوتان - 189 ريال</option>
                                     <option value="Basic - 3 Packs - 230 SAR">3 عبوات - 230 ريال</option>
                                 </optgroup>
-                                <optgroup label="المجموعة الأساسية 2 (Image 2)">
+                                <optgroup label="XXXL AFRICAN SIZE">
                                     <option value="Basic2 - 1 Pack - 155 SAR">عبوة واحدة - 155 ريال</option>
                                     <option value="Basic2 - 2 Packs - 189 SAR">عبوتان - 189 ريال</option>
                                     <option value="Basic2 - 3 Packs - 230 SAR">3 عبوات - 230 ريال</option>
                                 </optgroup>
-                                <optgroup label="المجموعة الخاصة (Image 5)">
+                                <optgroup label="SUPER VIGA">
                                     <option value="Special - 1 Pack - 125 SAR">عبوة واحدة - 125 ريال</option>
                                     <option value="Special - 2 Packs - 170 SAR">عبوتان - 170 ريال</option>
                                     <option value="Special - 3 Packs - 210 SAR">3 عبوات - 210 ريال</option>
                                 </optgroup>
-                                <optgroup label="المجموعة الماسية (Image 6)">
+                                <optgroup label="POWER">
                                     <option value="Diamond - 1 Pack - 145 SAR">عبوة واحدة - 145 ريال</option>
                                     <option value="Diamond - 2 Packs - 190 SAR">عبوتان - 190 ريال</option>
                                     <option value="Diamond - 3 Packs - 235 SAR">3 عبوات - 235 ريال</option>
                                 </optgroup>
-                                <optgroup label="المجموعة المتقدمة (Image 3)">
+                                <optgroup label="TITAN GEL">
                                     <option value="Advanced - 1 Pack - 120 SAR">عبوة واحدة - 120 ريال</option>
                                     <option value="Advanced - 2 Packs - 175 SAR">عبوتان - 175 ريال</option>
                                     <option value="Advanced - 3 Packs - 200 SAR">3 عبوات - 200 ريال</option>
                                 </optgroup>
-                                <optgroup label="المجموعة المميزة (Image 4)">
+                                <optgroup label="MAX MAN">
                                     <option value="Premium - 1 Pack - 120 SAR">عبوة واحدة - 120 ريال</option>
                                     <option value="Premium - 2 Packs - 175 SAR">عبوتان - 175 ريال</option>
                                     <option value="Premium - 3 Packs - 200 SAR">3 عبوات - 200 ريال</option>
@@ -326,11 +394,15 @@
             <div class="footer-logo">متجر <span>السعادة</span></div>
             <p>جميع الحقوق محفوظة &copy; 2024</p>
             <div class="social-icons">
-                <a href="#"><i class="fab fa-whatsapp"></i></a>
                 <a href="#"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/201031099850" target="_blank" class="whatsapp-float" id="whatsappBtn">
+        <img src="image/image-9.png" alt="WhatsApp">
+    </a>
 
     <script src="script.js"></script>
 </body>
