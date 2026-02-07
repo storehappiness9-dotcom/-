@@ -75,9 +75,6 @@ const countdown = () => {
     const countDate = new Date();
     countDate.setDate(countDate.getDate() + 3);
 
-    // Or hardcode a launch date
-    // const countDate = new Date("Jan 1, 2024 00:00:00").getTime();
-
     const now = new Date().getTime();
     const gap = countDate - now;
 
@@ -104,78 +101,257 @@ const countdown = () => {
 
 setInterval(countdown, 1000);
 
-// Product Image Floating Parallax (Optional smooth effect following mouse)
+// Product Image Floating Parallax
 document.addEventListener('mousemove', (e) => {
     const watchWrapper = document.querySelector('.image-wrapper');
     if (watchWrapper) {
         const x = (window.innerWidth - e.pageX * 2) / 100;
         const y = (window.innerHeight - e.pageY * 2) / 100;
-
         watchWrapper.style.transform = `translateX(${x}px) translateY(${y}px)`;
     }
 });
 
-// Form Submission
-const form = document.getElementById('leadForm');
-if (form) {
-    form.addEventListener('submit', (e) => {
+// ============================================
+// CART SYSTEM
+// ============================================
+
+// Cart State
+let cart = [];
+let isSubmitting = false;
+
+// Cart Elements
+const cartDrawer = document.getElementById('cartDrawer');
+const cartOverlay = document.getElementById('cartOverlay');
+const cartBadge = document.getElementById('cartBadge');
+const cartItemsContainer = document.getElementById('cartItems');
+const cartEmpty = document.getElementById('cartEmpty');
+const cartTotal = document.getElementById('cartTotal');
+const cartForm = document.getElementById('cartForm');
+const totalPriceEl = document.getElementById('totalPrice');
+const orderForm = document.getElementById('orderForm');
+
+// Open Cart
+function openCart() {
+    cartDrawer.classList.add('active');
+    cartOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+// Close Cart
+function closeCart() {
+    cartDrawer.classList.remove('active');
+    cartOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Close cart on ESC
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && cartDrawer.classList.contains('active')) {
+        closeCart();
+    }
+});
+
+// Add to Cart
+function addToCart(button) {
+    const productCard = button.closest('.product-card');
+    const productName = productCard.dataset.product;
+    const productImage = productCard.dataset.image;
+
+    // Get selected quantity
+    const selectedRadio = productCard.querySelector('input[type="radio"]:checked');
+
+    if (!selectedRadio) {
+        showAlert('يرجى اختيار عدد العبوات أولاً!', 'error');
+        return;
+    }
+
+    const quantity = parseInt(selectedRadio.value);
+    const price = parseInt(selectedRadio.dataset.price);
+
+    // Add to cart array
+    cart.push({
+        name: productName,
+        image: productImage,
+        quantity: quantity,
+        price: price
+    });
+
+    // Update UI
+    updateCartUI();
+
+    // Show success feedback
+    showAlert(`تمت إضافة ${productName} إلى السلة!`, 'success');
+
+    // Reset selection
+    selectedRadio.checked = false;
+
+    // Open cart drawer
+    openCart();
+}
+
+// Remove from Cart
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCartUI();
+}
+
+// Update Cart UI
+function updateCartUI() {
+    // Update all badges
+    const badges = document.querySelectorAll('.cart-badge');
+    badges.forEach(badge => {
+        badge.textContent = cart.length;
+
+        // Optional: Animation trigger
+        badge.classList.remove('pop');
+        void badge.offsetWidth; // trigger reflow
+        badge.classList.add('pop');
+    });
+
+    // Clear items container (keep empty state)
+    const existingItems = cartItemsContainer.querySelectorAll('.cart-item');
+    existingItems.forEach(item => item.remove());
+
+    if (cart.length === 0) {
+        // Show empty state
+        cartEmpty.style.display = 'block';
+        cartTotal.style.display = 'none';
+        cartForm.style.display = 'none';
+    } else {
+        // Hide empty state
+        cartEmpty.style.display = 'none';
+        cartTotal.style.display = 'block';
+        cartForm.style.display = 'block';
+
+        // Render cart items
+        let total = 0;
+        cart.forEach((item, index) => {
+            total += item.price;
+
+            const qtyText = item.quantity === 1 ? 'عبوة واحدة' :
+                item.quantity === 2 ? 'عبوتان' :
+                    `${item.quantity} عبوات`;
+
+            const itemEl = document.createElement('div');
+            itemEl.className = 'cart-item';
+            itemEl.innerHTML = `
+                <div class="cart-item-image">
+                    <img src="${item.image}" alt="${item.name}">
+                </div>
+                <div class="cart-item-details">
+                    <div class="cart-item-name">${item.name}</div>
+                    <div class="cart-item-qty">${qtyText}</div>
+                    <div class="cart-item-price">${item.price} ريال</div>
+                </div>
+                <button class="cart-item-remove" onclick="removeFromCart(${index})">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            cartItemsContainer.appendChild(itemEl);
+        });
+
+        // Update total
+        totalPriceEl.textContent = `${total} ريال`;
+    }
+}
+
+// Order Form Submission
+if (orderForm) {
+    orderForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const btn = form.querySelector('button');
-        const originalText = btn.innerText;
+        // Prevent double submission
+        if (isSubmitting) return;
 
-        // Collect Form Data
-        const product = document.getElementById('product').value;
-        const name = document.getElementById('name').value;
-        const address = document.getElementById('address').value;
-        const phone = document.getElementById('phone').value;
-        const date = new Date().toLocaleString();
+        // Validate cart
+        if (cart.length === 0) {
+            showAlert('السلة فارغة! أضف منتجات أولاً.', 'error');
+            return;
+        }
 
-        btn.innerText = 'جاري المعالجة...';
-        btn.style.opacity = '0.7';
+        // Get form data
+        const name = document.getElementById('cartName').value.trim();
+        const phone = document.getElementById('cartPhone').value.trim();
+        const address = document.getElementById('cartAddress').value.trim();
 
-        // Simulate Network Delay
-        setTimeout(() => {
-            // 1. Send directly to Google Sheets
-            const maskDate = new Date().toLocaleString();
-            /* CSV Download removed as per request */
+        // Validate form
+        if (!name || !phone || !address) {
+            showAlert('يرجى ملء جميع البيانات!', 'error');
+            return;
+        }
 
-            // 2. Send to Google Sheets
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbzW-a6L5-L8NeTTiTz7AGIRb39s3qY5lovM5eoWa5EnCtsYsak5aaCYVnODfL6kl877pQ/exec';
+        // Set submitting state
+        isSubmitting = true;
+        const btn = document.getElementById('confirmOrderBtn');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري المعالجة...';
+        btn.disabled = true;
 
+        // Calculate total
+        const total = cart.reduce((sum, item) => sum + item.price, 0);
 
-            // إعداد البيانات للإرسال
-            const formData = new FormData();
-            formData.append('Product', product);
-            formData.append('Name', name);
-            formData.append('Address', address);
-            formData.append('Phone', phone);
+        // Format products for submission
+        const products = cart.map(item => {
+            const qtyText = item.quantity === 1 ? '1 عبوة' :
+                item.quantity === 2 ? '2 عبوات' :
+                    `${item.quantity} عبوات`;
+            return `${item.name} (${qtyText}) - ${item.price} ريال`;
+        }).join(' | ');
 
-            fetch(scriptURL, { method: 'POST', body: formData })
-                .then(response => {
-                    // 3. Success UI
-                    btn.innerText = 'تم تسجيل طلبك بنجاح!';
-                    btn.style.background = '#10b981'; // Success Green
-                    btn.style.opacity = '1';
+        // Calculate delivery date (3 days from now)
+        const orderDate = new Date();
+        const deliveryDate = new Date();
+        deliveryDate.setDate(orderDate.getDate() + 3);
+        const formattedDeliveryDate = deliveryDate.toLocaleDateString('ar-EG', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });
 
-                    // Styled Alert
-                    showAlert("شكراً لك! تم استلام طلبك وتسجيله بنجاح.", "success");
-                    form.reset();
+        // Google Sheets URL
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxmMZPf0o8LJl68-ZB1_pAhIs99lOl_hIIIz7UV5Nip2PJo_PP-THB3oeXAWdcTZiMi2g/exec';
 
-                    setTimeout(() => {
-                        btn.innerText = originalText;
-                        btn.style.background = '';
-                    }, 4000);
-                })
-                .catch(error => {
-                    console.error('Error!', error.message);
-                    btn.innerText = 'حدث خطأ!';
-                    btn.style.background = 'red';
+        // Prepare form data
+        const formData = new FormData();
+        formData.append('Product', products);
+        formData.append('Name', name);
+        formData.append('Address', address);
+        formData.append('Phone', phone);
+        formData.append('Total', total + ' ريال');
+        formData.append('OrderDate', orderDate.toLocaleString('ar-EG'));
 
-                    // Styled Alert
-                    showAlert("حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى أو الاتصال بنا.", "error");
-                });
-        }, 1500);
+        try {
+            await fetch(scriptURL, { method: 'POST', body: formData });
+
+            // Success!
+            const successMessage = `
+تم تأكيد طلبك ✅
+التوصيل خلال 3 أيام من تاريخ الطلب (${formattedDeliveryDate})
+السعر الإجمالي: ${total} ريال
+لا يوجد دفع بالبطاقات، الدفع عند الاستلام فقط
+            `.trim();
+
+            showAlert(successMessage, 'success');
+
+            // Clear cart and form
+            cart = [];
+            updateCartUI();
+            orderForm.reset();
+
+            // Close cart after delay
+            setTimeout(() => {
+                closeCart();
+            }, 2000);
+
+        } catch (error) {
+            console.error('Error:', error);
+            showAlert('حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى.', 'error');
+        } finally {
+            // Reset button state
+            isSubmitting = false;
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }
     });
 }
 
@@ -195,23 +371,27 @@ function showAlert(message, type) {
 
     const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
 
+    // Handle multiline messages
+    const formattedMessage = message.replace(/\n/g, '<br>');
+
     alertEl.innerHTML = `
         <div class="custom-alert-content">
             <i class="fas ${icon}"></i>
-            <span>${message}</span>
+            <span>${formattedMessage}</span>
         </div>
         <button class="custom-alert-close" onclick="this.parentElement.remove()">&times;</button>
     `;
 
     container.appendChild(alertEl);
 
-    // Remove after 5 seconds
+    // Remove after 6 seconds for longer messages
+    const timeout = message.includes('\n') ? 8000 : 5000;
     setTimeout(() => {
         alertEl.style.animation = 'fadeOutUp 0.5s forwards';
         alertEl.addEventListener('animationend', () => {
             alertEl.remove();
         });
-    }, 5000);
+    }, timeout);
 }
 
 // Reveal Animations on Scroll
@@ -241,36 +421,6 @@ revealElements.forEach(el => {
 
 window.addEventListener('scroll', revealOnScroll);
 
-// Select Product Helper
-function selectProduct(type) {
-    const select = document.getElementById('product');
-    const formSection = document.getElementById('contact');
-
-    // Scroll to form
-    formSection.scrollIntoView({ behavior: 'smooth' });
-
-    // Select logic
-    if (type === 'typeA') {
-        select.value = "Basic - 2 Packs - 189 SAR"; // Best value
-    } else if (type === 'typeA2') {
-        select.value = "Basic2 - 2 Packs - 189 SAR"; // Best value
-    } else if (type === 'typeImg5') {
-        select.value = "Special - 2 Packs - 170 SAR";
-    } else if (type === 'typeImg6') {
-        select.value = "Diamond - 2 Packs - 190 SAR";
-    } else if (type === 'typeB') {
-        select.value = "Advanced - 2 Packs - 175 SAR";
-    } else if (type === 'typeC') {
-        select.value = "Premium - 2 Packs - 175 SAR";
-    }
-
-    // Highlight effect
-    select.style.borderColor = '#0284c7';
-    setTimeout(() => {
-        select.style.borderColor = '';
-    }, 2000);
-}
-
 // Certificate Modal Functions
 function openCertificateModal(imgSrc, title, description) {
     const modal = document.getElementById('certificateModal');
@@ -283,13 +433,13 @@ function openCertificateModal(imgSrc, title, description) {
     modalDesc.textContent = description;
 
     modal.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Prevent background scroll
+    document.body.style.overflow = 'hidden';
 }
 
 function closeCertificateModal() {
     const modal = document.getElementById('certificateModal');
     modal.classList.remove('active');
-    document.body.style.overflow = ''; // Restore scroll
+    document.body.style.overflow = '';
 }
 
 // Close modal on click outside content
@@ -306,3 +456,37 @@ document.addEventListener('keydown', (e) => {
         closeCertificateModal();
     }
 });
+
+// ============================================
+// RADIO BUTTON TOGGLE (DESELECT)
+// ============================================
+const quantityRadios = document.querySelectorAll('.quantity-option input[type="radio"]');
+quantityRadios.forEach(radio => {
+    // Initialize tracking attribute
+    radio.dataset.wasChecked = radio.checked;
+
+    radio.addEventListener('click', function (e) {
+        // If it was already checked before this click, uncheck it
+        if (this.dataset.wasChecked === 'true') {
+            this.checked = false;
+            this.dataset.wasChecked = 'false';
+
+            // Also need to trigger change event if needed by other listeners, 
+            // but for simple UI updates, unchecking is usually enough.
+            // However, visually we might need to update something if other logic depends on it.
+        } else {
+            // It was not checked, now it is. 
+            // Update tracking for this one
+            this.dataset.wasChecked = 'true';
+
+            // Update tracking for others in the same group (they became unchecked)
+            const groupName = this.name;
+            document.querySelectorAll(`input[name="${groupName}"]`).forEach(otherRadio => {
+                if (otherRadio !== this) {
+                    otherRadio.dataset.wasChecked = 'false';
+                }
+            });
+        }
+    });
+});
+

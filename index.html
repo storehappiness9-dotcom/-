@@ -25,8 +25,19 @@
             <ul class="nav-links">
                 <li><a href="#home">الرئيسية</a></li>
                 <li><a href="#offers">العروض</a></li>
-                <li><a href="#contact" class="btn-primary small">اطلب الآن</a></li>
+                <li>
+                    <button class="cart-btn" id="cartBtn" onclick="openCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-badge" id="cartBadge">0</span>
+                    </button>
+                </li>
             </ul>
+            <!-- Mobile Cart Button -->
+            <button class="cart-btn mobile-cart-btn" onclick="openCart()" aria-label="سلة المشتريات">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge mobile-badge">0</span>
+            </button>
+
             <!-- Hamburger Menu Button -->
             <button class="hamburger-menu" id="hamburgerBtn" aria-label="فتح القائمة">
                 <span></span>
@@ -43,7 +54,8 @@
             <ul class="mobile-nav-links">
                 <li><a href="#home">الرئيسية</a></li>
                 <li><a href="#offers">العروض</a></li>
-                <li><a href="#contact" class="btn-primary">اطلب الآن</a></li>
+                <li><a href="javascript:void(0)" onclick="closeMobileNav(); openCart();" class="btn-primary">السلة <i
+                            class="fas fa-shopping-cart"></i></a></li>
             </ul>
         </div>
     </div>
@@ -135,6 +147,30 @@
         </div>
     </section>
 
+    <!-- Info Section (Simplified) -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-wrapper glass-effect">
+                <div class="contact-info" style="grid-column: 1 / -1; text-align: center;">
+                    <h2>ابدأ رحلة <span>السعادة الآن</span></h2>
+                    <p style="max-width: 600px; margin: 0 auto 30px;">اختر منتجاتك المفضلة وأضفها للسلة، ثم أكمل طلبك
+                        بسهولة!</p>
+
+                    <div class="features-list-icon"
+                        style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+                        <p><i class="fas fa-check-circle"></i> دفع عند الاستلام</p>
+                        <p><i class="fas fa-check-circle"></i> شحن سريع لجميع المناطق</p>
+                        <p><i class="fas fa-check-circle"></i> ضمان الجودة 100%</p>
+                    </div>
+
+                    <a href="#offers" class="btn-primary" style="margin-top: 30px;">
+                        <i class="fas fa-shopping-bag"></i> تصفح المنتجات
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Offers/Products Section -->
     <section id="offers" class="features">
         <div class="container">
@@ -144,249 +180,302 @@
             </div>
 
             <div class="features-grid">
-                <!-- Card 1: Product Type A -->
-                <div class="feature-card glass-effect product-card">
+                <!-- Card 1: CAIQING -->
+                <div class="feature-card glass-effect product-card" data-product="CAIQING"
+                    data-image="image/image-1.jpeg">
                     <div class="product-image">
-                        <img src="image/image-1.jpeg" alt="Product Type A"
+                        <img src="image/image-1.jpeg" alt="CAIQING"
                             style="width:100%; border-radius:15px; margin-bottom:15px;">
                     </div>
                     <h3>CAIQING</h3>
                     <p class="description">حلول متكاملة لصحتك اليومية.</p>
 
-                    <div class="pricing-tiers">
-                        <div class="tier">
-                            <span>عبوة واحدة</span>
-                            <span class="price">155 ريال</span>
-                        </div>
-                        <div class="tier best-value">
-                            <span>عبوتان (توفير)</span>
-                            <span class="price">189 ريال</span>
-                        </div>
-                        <div class="tier">
-                            <span>3 عبوات (الأكثر طلباً)</span>
-                            <span class="price">230 ريال</span>
-                        </div>
+                    <div class="quantity-selection">
+                        <label class="quantity-option">
+                            <input type="radio" name="qty-CAIQING" value="1" data-price="155">
+                            <span class="option-content">
+                                <span class="option-label">عبوة واحدة</span>
+                                <span class="option-price">155 ريال</span>
+                            </span>
+                        </label>
+                        <label class="quantity-option best-value">
+                            <input type="radio" name="qty-CAIQING" value="2" data-price="189">
+                            <span class="option-content">
+                                <span class="option-label">عبوتان (توفير)</span>
+                                <span class="option-price">189 ريال</span>
+                            </span>
+                        </label>
+                        <label class="quantity-option">
+                            <input type="radio" name="qty-CAIQING" value="3" data-price="230">
+                            <span class="option-content">
+                                <span class="option-label">3 عبوات (الأكثر طلباً)</span>
+                                <span class="option-price">230 ريال</span>
+                            </span>
+                        </label>
                     </div>
 
-                    <a href="#contact" class="btn-primary full-width" onclick="selectProduct('typeA')">اطلب هذا
-                        العرض</a>
+                    <button class="btn-primary full-width add-to-cart-btn" onclick="addToCart(this)">
+                        <i class="fas fa-cart-plus"></i> إضافة للسلة
+                    </button>
                 </div>
 
-                <!-- Card 1.5: Product Type A2 (Image 2) -->
-                <div class="feature-card glass-effect product-card">
+                <!-- Card 2: XXXL AFRICAN SIZE -->
+                <div class="feature-card glass-effect product-card" data-product="XXXL AFRICAN SIZE"
+                    data-image="image/image-2.jpeg">
                     <div class="product-image">
-                        <img src="image/image-2.jpeg" alt="Product Type A2"
+                        <img src="image/image-2.jpeg" alt="XXXL AFRICAN SIZE"
                             style="width:100%; border-radius:15px; margin-bottom:15px;">
                     </div>
                     <h3>XXXL AFRICAN SIZE</h3>
                     <p class="description">تصميم مميز يناسب ذوقك.</p>
 
-                    <div class="pricing-tiers">
-                        <div class="tier">
-                            <span>عبوة واحدة</span>
-                            <span class="price">155 ريال</span>
-                        </div>
-                        <div class="tier best-value">
-                            <span>عبوتان (توفير)</span>
-                            <span class="price">189 ريال</span>
-                        </div>
-                        <div class="tier">
-                            <span>3 عبوات (الأكثر طلباً)</span>
-                            <span class="price">230 ريال</span>
-                        </div>
+                    <div class="quantity-selection">
+                        <label class="quantity-option">
+                            <input type="radio" name="qty-XXXL" value="1" data-price="155">
+                            <span class="option-content">
+                                <span class="option-label">عبوة واحدة</span>
+                                <span class="option-price">155 ريال</span>
+                            </span>
+                        </label>
+                        <label class="quantity-option best-value">
+                            <input type="radio" name="qty-XXXL" value="2" data-price="189">
+                            <span class="option-content">
+                                <span class="option-label">عبوتان (توفير)</span>
+                                <span class="option-price">189 ريال</span>
+                            </span>
+                        </label>
+                        <label class="quantity-option">
+                            <input type="radio" name="qty-XXXL" value="3" data-price="230">
+                            <span class="option-content">
+                                <span class="option-label">3 عبوات (الأكثر طلباً)</span>
+                                <span class="option-price">230 ريال</span>
+                            </span>
+                        </label>
                     </div>
 
-                    <a href="#contact" class="btn-primary full-width" onclick="selectProduct('typeA2')">اطلب هذا
-                        العرض</a>
+                    <button class="btn-primary full-width add-to-cart-btn" onclick="addToCart(this)">
+                        <i class="fas fa-cart-plus"></i> إضافة للسلة
+                    </button>
                 </div>
 
-                <!-- Card: Product Image 5 -->
-                <div class="feature-card glass-effect product-card">
+                <!-- Card 3: SUPER VIGA -->
+                <div class="feature-card glass-effect product-card" data-product="SUPER VIGA"
+                    data-image="image/image-5.jpeg">
                     <div class="product-image">
-                        <img src="image/image-5.jpeg" alt="Product Image 5"
+                        <img src="image/image-5.jpeg" alt="SUPER VIGA"
                             style="width:100%; border-radius:15px; margin-bottom:15px;">
                     </div>
                     <h3>SUPER VIGA</h3>
                     <p class="description">جودة عالية وسعر منافس.</p>
 
-                    <div class="pricing-tiers">
-                        <div class="tier">
-                            <span>عبوة واحدة</span>
-                            <span class="price">125 ريال</span>
-                        </div>
-                        <div class="tier best-value">
-                            <span>عبوتان (توفير)</span>
-                            <span class="price">170 ريال</span>
-                        </div>
-                        <div class="tier">
-                            <span>3 عبوات (الأكثر طلباً)</span>
-                            <span class="price">210 ريال</span>
-                        </div>
+                    <div class="quantity-selection">
+                        <label class="quantity-option">
+                            <input type="radio" name="qty-VIGA" value="1" data-price="125">
+                            <span class="option-content">
+                                <span class="option-label">عبوة واحدة</span>
+                                <span class="option-price">125 ريال</span>
+                            </span>
+                        </label>
+                        <label class="quantity-option best-value">
+                            <input type="radio" name="qty-VIGA" value="2" data-price="170">
+                            <span class="option-content">
+                                <span class="option-label">عبوتان (توفير)</span>
+                                <span class="option-price">170 ريال</span>
+                            </span>
+                        </label>
+                        <label class="quantity-option">
+                            <input type="radio" name="qty-VIGA" value="3" data-price="210">
+                            <span class="option-content">
+                                <span class="option-label">3 عبوات (الأكثر طلباً)</span>
+                                <span class="option-price">210 ريال</span>
+                            </span>
+                        </label>
                     </div>
 
-                    <a href="#contact" class="btn-primary full-width" onclick="selectProduct('typeImg5')">اطلب هذا
-                        العرض</a>
+                    <button class="btn-primary full-width add-to-cart-btn" onclick="addToCart(this)">
+                        <i class="fas fa-cart-plus"></i> إضافة للسلة
+                    </button>
                 </div>
 
-                <!-- Card: Product Image 6 -->
-                <div class="feature-card glass-effect product-card">
+                <!-- Card 4: POWER -->
+                <div class="feature-card glass-effect product-card" data-product="POWER"
+                    data-image="image/image-6.jpeg">
                     <div class="product-image">
-                        <img src="image/image-6.jpeg" alt="Product Image 6"
+                        <img src="image/image-6.jpeg" alt="POWER"
                             style="width:100%; border-radius:15px; margin-bottom:15px;">
                     </div>
                     <h3>POWER</h3>
                     <p class="description">الأفضل مبيعاً هذا الموسم.</p>
 
-                    <div class="pricing-tiers">
-                        <div class="tier">
-                            <span>عبوة واحدة</span>
-                            <span class="price">145 ريال</span>
-                        </div>
-                        <div class="tier best-value">
-                            <span>عبوتان (توفير)</span>
-                            <span class="price">190 ريال</span>
-                        </div>
-                        <div class="tier">
-                            <span>3 عبوات (الأكثر طلباً)</span>
-                            <span class="price">235 ريال</span>
-                        </div>
+                    <div class="quantity-selection">
+                        <label class="quantity-option">
+                            <input type="radio" name="qty-POWER" value="1" data-price="145">
+                            <span class="option-content">
+                                <span class="option-label">عبوة واحدة</span>
+                                <span class="option-price">145 ريال</span>
+                            </span>
+                        </label>
+                        <label class="quantity-option best-value">
+                            <input type="radio" name="qty-POWER" value="2" data-price="190">
+                            <span class="option-content">
+                                <span class="option-label">عبوتان (توفير)</span>
+                                <span class="option-price">190 ريال</span>
+                            </span>
+                        </label>
+                        <label class="quantity-option">
+                            <input type="radio" name="qty-POWER" value="3" data-price="235">
+                            <span class="option-content">
+                                <span class="option-label">3 عبوات (الأكثر طلباً)</span>
+                                <span class="option-price">235 ريال</span>
+                            </span>
+                        </label>
                     </div>
 
-                    <a href="#contact" class="btn-primary full-width" onclick="selectProduct('typeImg6')">اطلب هذا
-                        العرض</a>
+                    <button class="btn-primary full-width add-to-cart-btn" onclick="addToCart(this)">
+                        <i class="fas fa-cart-plus"></i> إضافة للسلة
+                    </button>
                 </div>
 
-                <!-- Card 2: Product Type B -->
-                <div class="feature-card glass-effect product-card">
+                <!-- Card 5: TITAN GEL -->
+                <div class="feature-card glass-effect product-card" data-product="TITAN GEL"
+                    data-image="image/image-3.jpeg">
                     <div class="product-image">
-                        <img src="image/image-3.jpeg" alt="Product Type B"
+                        <img src="image/image-3.jpeg" alt="TITAN GEL"
                             style="width:100%; border-radius:15px; margin-bottom:15px;">
                     </div>
                     <h3>TITAN GEL</h3>
                     <p class="description">فعالية مضاعفة لنتائج أسرع.</p>
 
-                    <div class="pricing-tiers">
-                        <div class="tier">
-                            <span>عبوة واحدة</span>
-                            <span class="price">120 ريال</span>
-                        </div>
-                        <div class="tier best-value">
-                            <span>عبوتان (توفير)</span>
-                            <span class="price">175 ريال</span>
-                        </div>
-                        <div class="tier">
-                            <span>3 عبوات (VIP)</span>
-                            <span class="price">200 ريال</span>
-                        </div>
+                    <div class="quantity-selection">
+                        <label class="quantity-option">
+                            <input type="radio" name="qty-TITAN" value="1" data-price="120">
+                            <span class="option-content">
+                                <span class="option-label">عبوة واحدة</span>
+                                <span class="option-price">120 ريال</span>
+                            </span>
+                        </label>
+                        <label class="quantity-option best-value">
+                            <input type="radio" name="qty-TITAN" value="2" data-price="175">
+                            <span class="option-content">
+                                <span class="option-label">عبوتان (توفير)</span>
+                                <span class="option-price">175 ريال</span>
+                            </span>
+                        </label>
+                        <label class="quantity-option">
+                            <input type="radio" name="qty-TITAN" value="3" data-price="200">
+                            <span class="option-content">
+                                <span class="option-label">3 عبوات (الأكثر طلباً)</span>
+                                <span class="option-price">200 ريال</span>
+                            </span>
+                        </label>
                     </div>
 
-                    <a href="#contact" class="btn-primary full-width" onclick="selectProduct('typeB')">اطلب هذا
-                        العرض</a>
+                    <button class="btn-primary full-width add-to-cart-btn" onclick="addToCart(this)">
+                        <i class="fas fa-cart-plus"></i> إضافة للسلة
+                    </button>
                 </div>
 
-                <!-- Card 3: Product Type C (Image 4) -->
-                <div class="feature-card glass-effect product-card">
+                <!-- Card 6: MAX MAN -->
+                <div class="feature-card glass-effect product-card" data-product="MAX MAN"
+                    data-image="image/image-4.jpeg">
                     <div class="product-image">
-                        <img src="image/image-4.jpeg" alt="Product Type C"
+                        <img src="image/image-4.jpeg" alt="MAX MAN"
                             style="width:100%; border-radius:15px; margin-bottom:15px;">
                     </div>
                     <h3>MAX MAN</h3>
                     <p class="description">منتجات حصرية للعناية الخاصة.</p>
 
-                    <div class="pricing-tiers">
-                        <div class="tier">
-                            <span>عبوة واحدة</span>
-                            <span class="price">120 ريال</span>
-                        </div>
-                        <div class="tier best-value">
-                            <span>عبوتان (توفير)</span>
-                            <span class="price">175 ريال</span>
-                        </div>
-                        <div class="tier">
-                            <span>3 عبوات</span>
-                            <span class="price">200 ريال</span>
-                        </div>
+                    <div class="quantity-selection">
+                        <label class="quantity-option">
+                            <input type="radio" name="qty-MAXMAN" value="1" data-price="120">
+                            <span class="option-content">
+                                <span class="option-label">عبوة واحدة</span>
+                                <span class="option-price">120 ريال</span>
+                            </span>
+                        </label>
+                        <label class="quantity-option best-value">
+                            <input type="radio" name="qty-MAXMAN" value="2" data-price="175">
+                            <span class="option-content">
+                                <span class="option-label">عبوتان (توفير)</span>
+                                <span class="option-price">175 ريال</span>
+                            </span>
+                        </label>
+                        <label class="quantity-option">
+                            <input type="radio" name="qty-MAXMAN" value="3" data-price="200">
+                            <span class="option-content">
+                                <span class="option-label">3 عبوات (الأكثر طلباً)</span>
+                                <span class="option-price">200 ريال</span>
+                            </span>
+                        </label>
                     </div>
 
-                    <a href="#contact" class="btn-primary full-width" onclick="selectProduct('typeC')">اطلب هذا
-                        العرض</a>
+                    <button class="btn-primary full-width add-to-cart-btn" onclick="addToCart(this)">
+                        <i class="fas fa-cart-plus"></i> إضافة للسلة
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Lead Form Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="contact-wrapper glass-effect">
-                <div class="contact-info">
-                    <h2>ابدأ رحلة <br><span>السعادة الآن</span></h2>
-                    <p>سجل طلبك وسيقوم فريقنا بالتواصل معك لتأكيد الطلب وشحنه إليك في أسرع وقت.</p>
 
-                    <div class="features-list-icon">
-                        <p><i class="fas fa-check-circle"></i> دفع عند الاستلام</p>
-                        <p><i class="fas fa-check-circle"></i> شحن سريع لجميع المناطق</p>
-                        <p><i class="fas fa-check-circle"></i> ضمان الجودة 100%</p>
-                    </div>
+
+    <!-- Cart Drawer Overlay -->
+    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+    <!-- Cart Drawer -->
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h3><i class="fas fa-shopping-cart"></i> سلة المشتريات</h3>
+            <button class="cart-close" onclick="closeCart()">&times;</button>
+        </div>
+
+        <div class="cart-body">
+            <!-- Cart Items -->
+            <div class="cart-items" id="cartItems">
+                <div class="cart-empty" id="cartEmpty">
+                    <i class="fas fa-shopping-basket"></i>
+                    <p>السلة فارغة</p>
+                    <span>أضف منتجات من العروض</span>
                 </div>
-                <div class="contact-form">
-                    <form id="leadForm">
-                        <div class="form-group">
-                            <label for="product">اختار المنتج</label>
-                            <select id="product" required
-                                style="width: 100%; padding: 15px; background: rgba(0,0,0,0.3); border: 1px solid var(--glass-border); border-radius: 10px; color: white; font-size: 1rem; outline: none;">
-                                <option value="" disabled selected>-- اختر العرض --</option>
-                                <optgroup label="CAIQING">
-                                    <option value="Basic - 1 Pack - 155 SAR">عبوة واحدة - 155 ريال</option>
-                                    <option value="Basic - 2 Packs - 189 SAR">عبوتان - 189 ريال</option>
-                                    <option value="Basic - 3 Packs - 230 SAR">3 عبوات - 230 ريال</option>
-                                </optgroup>
-                                <optgroup label="XXXL AFRICAN SIZE">
-                                    <option value="Basic2 - 1 Pack - 155 SAR">عبوة واحدة - 155 ريال</option>
-                                    <option value="Basic2 - 2 Packs - 189 SAR">عبوتان - 189 ريال</option>
-                                    <option value="Basic2 - 3 Packs - 230 SAR">3 عبوات - 230 ريال</option>
-                                </optgroup>
-                                <optgroup label="SUPER VIGA">
-                                    <option value="Special - 1 Pack - 125 SAR">عبوة واحدة - 125 ريال</option>
-                                    <option value="Special - 2 Packs - 170 SAR">عبوتان - 170 ريال</option>
-                                    <option value="Special - 3 Packs - 210 SAR">3 عبوات - 210 ريال</option>
-                                </optgroup>
-                                <optgroup label="POWER">
-                                    <option value="Diamond - 1 Pack - 145 SAR">عبوة واحدة - 145 ريال</option>
-                                    <option value="Diamond - 2 Packs - 190 SAR">عبوتان - 190 ريال</option>
-                                    <option value="Diamond - 3 Packs - 235 SAR">3 عبوات - 235 ريال</option>
-                                </optgroup>
-                                <optgroup label="TITAN GEL">
-                                    <option value="Advanced - 1 Pack - 120 SAR">عبوة واحدة - 120 ريال</option>
-                                    <option value="Advanced - 2 Packs - 175 SAR">عبوتان - 175 ريال</option>
-                                    <option value="Advanced - 3 Packs - 200 SAR">3 عبوات - 200 ريال</option>
-                                </optgroup>
-                                <optgroup label="MAX MAN">
-                                    <option value="Premium - 1 Pack - 120 SAR">عبوة واحدة - 120 ريال</option>
-                                    <option value="Premium - 2 Packs - 175 SAR">عبوتان - 175 ريال</option>
-                                    <option value="Premium - 3 Packs - 200 SAR">3 عبوات - 200 ريال</option>
-                                </optgroup>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="name">الاسم الكامل</label>
-                            <input type="text" id="name" placeholder="أدخل اسمك هنا" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="address">العنوان بالتفصيل</label>
-                            <input type="text" id="address" placeholder="المدينة، الحي، اسم الشارع" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">رقم الجوال</label>
-                            <input type="tel" id="phone" placeholder="05xxxxxxxx" required>
-                        </div>
+            </div>
 
-                        <button type="submit" class="btn-primary full-width">أكد الطلب الآن</button>
-                    </form>
+            <!-- Cart Total -->
+            <div class="cart-total" id="cartTotal" style="display: none;">
+                <div class="total-row">
+                    <span>الإجمالي:</span>
+                    <span class="total-price" id="totalPrice">0 ريال</span>
+                </div>
+            </div>
+
+            <!-- Order Form inside Cart -->
+            <div class="cart-form" id="cartForm" style="display: none;">
+                <h4><i class="fas fa-user"></i> بيانات التوصيل</h4>
+                <form id="orderForm">
+                    <div class="form-group">
+                        <label for="cartName">الاسم الكامل</label>
+                        <input type="text" id="cartName" placeholder="أدخل اسمك هنا" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cartPhone">رقم الجوال</label>
+                        <input type="tel" id="cartPhone" placeholder="05xxxxxxxx" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cartAddress">العنوان بالتفصيل</label>
+                        <input type="text" id="cartAddress" placeholder="المدينة، الحي، اسم الشارع" required>
+                    </div>
+
+                    <button type="submit" class="btn-primary full-width confirm-order-btn" id="confirmOrderBtn">
+                        <i class="fas fa-check-circle"></i> تأكيد الطلب
+                    </button>
+                </form>
+
+                <div class="payment-note">
+                    <i class="fas fa-info-circle"></i>
+                    <span>الدفع عند الاستلام فقط - لا يوجد دفع بالبطاقات</span>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- Footer -->
     <footer>
