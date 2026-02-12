@@ -453,15 +453,16 @@
                 <form id="orderForm">
                     <div class="form-group">
                         <label for="cartName">الاسم الكامل</label>
-                        <input type="text" id="cartName" placeholder="أدخل اسمك هنا" required>
+                        <input type="text" id="cartName" name="name" placeholder="أدخل اسمك هنا" required>
                     </div>
                     <div class="form-group">
                         <label for="cartPhone">رقم الجوال</label>
-                        <input type="tel" id="cartPhone" placeholder="05xxxxxxxx" required>
+                        <input type="tel" id="cartPhone" name="phone" placeholder="05xxxxxxxx" required>
                     </div>
                     <div class="form-group">
                         <label for="cartAddress">العنوان بالتفصيل</label>
-                        <input type="text" id="cartAddress" placeholder="المدينة، الحي، اسم الشارع" required>
+                        <input type="text" id="cartAddress" name="address" placeholder="المدينة، الحي، اسم الشارع"
+                            required>
                     </div>
 
                     <button type="submit" class="btn-primary full-width confirm-order-btn" id="confirmOrderBtn">

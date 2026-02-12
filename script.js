@@ -308,51 +308,52 @@ if (orderForm) {
             year: 'numeric'
         });
 
-        // --- WhatsApp Integration ---
-        const waNumber = "201031099850";
-        const waProducts = cart.map(item => {
-            const qtyText = item.quantity === 1 ? '1 عبوة' :
-                item.quantity === 2 ? '2 عبوات' :
-                    `${item.quantity} عبوات`;
-            return `- ${item.name} (${qtyText}) : ${item.price} ريال`;
-        }).join('\n');
+        // --- Google Sheets Integration ---
+        // TODO: ADD YOUR GOOGLE APPS SCRIPT URL HERE
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxmMZPf0o8LJl68-ZB1_pAhIs99lOl_hIIIz7UV5Nip2PJo_PP-THB3oeXAWdcTZiMi2g/exec';
 
-        const waMessage = `*طلب جديد من متجر السعادة* 🛍️\n\n` +
-            `👤 *الاسم:* ${name}\n` +
-            `📍 *العنوان:* ${address}\n` +
-            `📱 *رقم الهاتف:* ${phone}\n\n` +
-            `📦 *المنتجات:*\n${waProducts}\n\n` +
-            `💰 *الإجمالي:* ${total} ريال\n` +
-            `📅 *تاريخ الطلب:* ${orderDate.toLocaleString('ar-EG')}`;
+        const formParams = new FormData();
+        formParams.append('OrderDate', new Date().toLocaleString('ar-EG'));
+        formParams.append('Name', name);
+        formParams.append('Phone', phone);
+        formParams.append('Address', address);
+        formParams.append('Product', products);
+        formParams.append('Total', total);
 
-        const waURL = `https://wa.me/${waNumber}?text=${encodeURIComponent(waMessage)}`;
+        try {
+            await fetch(scriptURL, {
+                method: 'POST',
+                body: formParams
+            });
 
-        // Open WhatsApp
-        window.open(waURL, '_blank');
-
-        // Show Success Message
-        const successMessage = `
-تم تحويل طلبك إلى واتساب للإرسال ✅
+            // Show Success Message
+            const successMessage = `
+تم استلام طلبك بنجاح ✅
 التوصيل خلال 3 أيام (${formattedDeliveryDate})
 السعر الإجمالي: ${total} ريال
-        `.trim();
+            `.trim();
 
-        showAlert(successMessage, 'success');
+            showAlert(successMessage, 'success');
 
-        // Clear cart and form
-        cart = [];
-        updateCartUI();
-        orderForm.reset();
+            // Clear cart and form
+            cart = [];
+            updateCartUI();
+            orderForm.reset();
 
-        // Close cart after delay
-        setTimeout(() => {
-            closeCart();
-        }, 2000);
+            // Close cart after delay
+            setTimeout(() => {
+                closeCart();
+            }, 3000);
 
-        // Reset button state
-        isSubmitting = false;
-        btn.innerHTML = originalText;
-        btn.disabled = false;
+        } catch (error) {
+            showAlert('عذراً، حدث خطأ أثناء إرسال الطلب. يرجى المحاولة مرة أخرى.', 'error');
+            console.error('Error!', error.message);
+        } finally {
+            // Reset button state
+            isSubmitting = false;
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }
     });
 }
 
